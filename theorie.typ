@@ -148,12 +148,13 @@ Let
 $
   S : V-> W
 $
-be a linear map between two f.dim. Vect.spaces $V$ & $W$ over $K$. Let $Beta$ be a basis for $V$ and $Kappa$ a basis for $w$.\
+be a linear map between two f.dim. Vect.spaces $V$ & $W$ over $K$. Let $Beta$ be a basis for $V$ and $Kappa$ a basis for $W$.\
 Cosider
 $
   S^star : W^star -> V^star
 $
-and the bases $Kappa^star, Beta^star$ for $W^star,V^star$, respectibely. Then
+and the bases $Kappa^star, Beta^star$ for $W^star,V^star$, respectibely. \
+Then
 $
   [S^star]_(Beta^star)^(Kappa^star) = [S^Beta_Kappa]^T
 $
@@ -167,9 +168,9 @@ $A$ satisfies
 $
   S v_j = um a_(i j) w_i
 $
-Now for $w`star in Kappa^star$ we have
+Now for $w^star in Kappa^star$ we have
 $
-  S^star w_j^star &= w_j compose S\
+  S^star w_j^star &= w_j^star compose S\
   &= um (w_j^star compose S)(v_i) v_i^star\
   &=um w_j^star (S(v_i)) v_i ^star\
   &= um w_j^star (sum_(k=1)^n a_(k i) w_k) v_i^star = um a_(j i) v_i ^star 
@@ -182,7 +183,7 @@ row j in $A$, represented as col in the matrix $A^T$
 
 #proved 
 #pagebreak()
-= The iso theoreme 18.c.5
+= The isomorphism theorem (18.c.5)
 
 Let $V,W$ be vect.sp.over $K$ and 
 $
@@ -190,7 +191,7 @@ $
 $
 a linear map. Define a new map
 $
-  overline(T):  V slash_(ker(T)) -> im(T,)
+  overline(T):  V slash_(ker(T)) -> im(T)
 $
 Let $x in V slash_(ker(T)) $. Choose a represantative $v in V$ for x.
 $
@@ -261,3 +262,565 @@ $
 == The commutativity of the diagram
 
 This follows immediately from the definitions. 
+
+#pagebreak()
+
+= Determinant
+
+== Definition of sgn of a permutation
+
+Let 
+$
+  D : M_(n times n)(K) -> K
+$
+be an n-linear alternating function\
+Denote
+$
+  I = ID = mat(bar.h epsilon_1 bar.h; dots.v;bar.h epsilon_n bar.h)
+$
+$B = (epsilon_1,dots, epsilon_n)$ is the standard basis of $K^n_("row")$
+\
+clearly
+
+$
+  alpha_i = um A (i,j) epsilon_j  quad fa 1<= i <= n 
+$
+$
+  => D(A) &= D(alpha_1, dots, alpha_n) \
+  &= D(sum_(j=1)^n A(1,j) epsilon_j , alpha_2, dots,alpha_n)\
+  &= sum_(j=1)^n A (1,j) dot D(epsilon_j, alpha_2, dots, alpha_n)\
+  &= sum_(j,k) A(1,j) dot A( 2,k) dot D(epsilon_j, epsilon_k, dots, alpha_n)\
+  &= sum_(k_1,dots, k_n) (product_(j=1)^n A(j,k_j)) D(I)
+$
+Using the assumption that $D$ is alternating. $=>$ $D(epsilon_k_1,dots,epsilon_k_n)= n$ whenever two indices $k_1,dots,k_n$ are equal.\ 
+So we are interested only in ordered sequence in which:
+$
+  fa  k_j != k_i quad fa i !=j
+$
+This is a permutation of degree n.\
+We can think of it as a bijective function
+$
+  sigma : {1,dots, n} -> {1,dots, n}
+$
+then the sequence 
+$
+  (k_1, dots, k_n) = (sigma(1), dots, sigma(n))
+$
+is a permutaion as defined earlier.\
+We can write 
+$
+  D(A) = sum_(sigma in S_n) A (1,sigma(1)) dot A(2,sigma(2))dot dots dot A(n,sigma(n)) D(epsilon_(sigma(1)), dots , epsilon_(sigma(n))) = sum_(sigma in S_n)  D(epsilon_(sigma(1)), dots , epsilon_(sigma(n))) product_(i =1)^n A(i,sigma(i))
+ $
+ \
+ Let $sigma$ be a per utaion of degree n. Then on can pass from $(1, dots, n)$ to $(sigma(1), dots, sigma(n))$ by performing a finite sequence of interchanges of pairs (transposition).\
+ More precisely, transposition is a permutation:
+ $
+   theta: {1,dots, n} -> {1,dots,n} quad 
+ 
+ "for which" quad 
+ 
+   ex i,j in {1,dots,n}, quad i != j\
+   st  theta(i) = theta(j) "and" theta(k) = k quad fa k != i,j
+ $
+ Now, every permutation can be written as a composition of transpositions
+ $
+   sigma = theta_1 compose dots compose theta_m
+ $
+ The transposition are not unique. There are many different way
+ $
+   sigma = theta_1 compose dots compose theta_m = theta'_1 compose dots compose theta'_m'
+ $
+ To show there are many different ways we can look at examples
+ $
+   sigma := (1,2,3) -> (3,2,1) 
+ $
+ $
+   sigma = t_(0,1) compose t_(1,2) compose t_(0,1) = t_(0,2)
+ $
+ == Lemma (20.b.1)
+ If a permutation is obtained from two different ways, one time by a sequence of $m$ permutations, and another time by a sequnce of $m'$ transposition, the $m$ and $m'$ have the same parity
+ $
+   (-1)^m = (-1)^m'
+ $
+ The parity only depends on $sigma$ and not on the a particular way we performed a seq. of transpositions.
+ Note 
+ $
+   sgn(sigma) := (-1)^m  quad fa m   
+ $\
+ Proof\
+ Fix a determinant funct. 
+ $
+   E: M_(n times n) (K) -> K
+ $
+ consider 
+ $
+   E(e_(sigma(1)), dots, e_(sigma(n)))
+ $
+ If $(sigma(1), dots, sigma(n))$ can be obtained from $(1,dots, n)$ by a sequence of $m$ transposition then the matrix 
+  $
+    mat(bar.h, e_(sigma(1)), bar.h;,dots.v,;bar.h,e_sigma(n),bar.h)
+  $
+  can be obtained from I = $mat(bar.h,e_1,bar.h;,dots.v,;bar.h,e_n,bar.h)$ by a seuqnce of interchanges of m pairs of rows.
+  $
+    =>E(e_(sigma(1)), dots, e_(sigma(n))) &= (-1)^m E(e_1,dots,e_n) = (-1)^m E(I) = (-1)^m quad fa m
+  $
+  $
+    => m = m'
+  $
+  $
+    => D(A) = sum_(sigma in S_n) sgn(sigma) product_(i=1)^n A(i,sigma(1))
+  $
+
+== 20.b.5
+$
+  fa A,B in M_(n times n) (K) "we have" quad det(A dot B) = det(A) dot det(B)
+$
+Proof\
+Fix a mat $B in M_(n times n) (K)$, and consider a funct.
+$
+  D: M_(n times n) (K) -> K\
+  D(A) := det(A dot B)
+$
+Claim D is n-linear and alternating.\
+Proof of claim\
+Write
+$
+  A = mat(bar.h, alpha_1, bar.h;,dots.v,;bar.h,alpha_n,bar.h)
+$
+If we vies $alpha_i$ as an $1 times n$ matrix then $alpha_1 dots B$ is also $1 times n$, and in fact 
+$
+  A dot B = mat(bar.h, alpha_1 dot B, bar.h;,dots.v,;bar.h,alpha_n dot B, bar.h)
+$
+So 
+$
+  D(A) = det ( alpha_1, dot B, dots, alpha_n dot B)
+$
+Clearly $fa$ two row vector
+\
+gefällt mir nicht mache einen anderen Beweis\ \
+Proof\
+Let $A,B,C in M_(n times n) (K)$, define
+$
+  C = A B
+$ 
+using matrix multiplication
+$
+  c_(i,j) =  sum_(K=1)^n a_(i,k) b_(k,j)
+$
+Therefore
+$
+  det(C) &= det(A B)\
+  &= sum_(sigma in S_n) sgn(sigma) product^n_(i=1) c_(i,sigma(i))\
+  &= sum_(sigma in S_n) sgn(sigma) product^n_(i=1) (sum_(k_i)^n a_(i,k_i)b_(k_i, sigma(i)))\
+  &=sum^n_(k_1,dots,k_n)  product_(i=1)^n a_(i,k_i) underbrace(sum_(sigma in S_n) sgn(sigma)product_(i=1)^n b_(k_i,sigma(i)), k_i = k_j =>quad  =0 )
+$
+If $k_i = k_j$ then the right site is $=0$, therefore we can change to assuming permutation
+$
+  =>   dots =(sum_(pi in S_n) product^n_(i=1) a_(i,pi(i))) (sum_(sigma in S_n) sgn(sigma) product_(i=1)^n b_(pi(i), sigma(i)))\
+$
+Let $sigma = tau compose pi in S_n$, with $tau in S_n$
+$
+  => dots &=(sum_(pi in S_n) product^n_(i=1) a_(i,pi(i))) (sum_(tau compose pi in S_n) sgn(tau compose pi) product_(i=1)^n b_(pi(i), (tau compose  pi) (i)))\
+$
+
+Since $pi$ is a permutation, we may reindex the product, and since multiplication in K is commutative, the order of the factors does not matter. Note that  $sgn(pi compose tau) = sgn(pi) sgn(tau)$.  
+$
+  =>dots &=(sum_(pi in S_n) sgn(pi) product^n_(i=1) a_(i,pi(i))) (sum_(tau  in S_n) sgn(tau) product_(j=1)^n b_(j, tau  (j))) = det(A) det(B)
+$
+(Since $sgn(pi)$ is independent of $tau$, it can be factored out of the inner sum and absorbed into the outer sum over $pi$.)
+
+== 20.b.3
+$fa$ n-linear. alternating function 
+$
+  D: M_(n times n) (K) -> K
+$
+Let $A in M_(n times n) (K)$
+$
+  => alpha_i = um A(i,j) e_j quad fa 1<=i <=n 
+$
+we have 
+$
+  D(A) &= D(alpha_1, dots, alpha_n)\
+  &= sum_(i_1,dots,i_n) product_(k=1)^n a(i_k,k) D(e_i_1, dots, e_i_n)
+$
+
+Since $D$ is alternating every therm with equal indices vanishes. We can witch to permutation.
+$
+  => D(A) = sum_(sigma in S_n) product_(k=1)^n a(sigma(k),k) D(e_sigma(1), dots, e_sigma(n))
+$
+Since D is alternating
+$
+   D(e_sigma(1), dots, e_sigma(n)) = sgn(sigma) D(I)
+$
+therefore
+$
+  D(A) &= (sum_(sigma in S_n) sgn(sigma) product_(i=1)^n a(sigma(i),i)) D(I)\ 
+  &= det(A) D(I)
+$
+
+== Determinants of endomorphisms
+
+Let 
+$
+  A in M_(n times n) (K) quad "and" quad P in G L (n,K) 
+$
+Then
+$
+  det(P^(-1) A P) &= det(P^(-1)) det(A) det (P)\
+  &= 1/(det(P)) det(A) det(P) = det(A)
+$
+$=>$ similar matrices have the same determinant.
+
+\
+\
+Let $V$ be a finit dim. vect space over $K$. Put $n:=dim(V)$.
+Let 
+$
+  T: V-> V quad "a linear map"
+$
+Pick a basis $B$ for $V$. This gets us a matrix $[T]_B^B in M_(n times n) (K)$.\ 
+Consider $det([T]_B^B)$.\
+ Does $det([T]_B^B)$ depend on $B$?\
+ Let $B'$ another basis for $V$. Denote by
+ $
+   P := [idv]_B^B'
+ $
+ the transition mat. between the basis $B'$ and $B$.\
+ Recall that
+ $
+   [T]_B'^B' = [idv]_B'^B dot[T]_B^B dot [idv]_B^B'
+ $ 
+ and also we have
+ $
+   [idv]_B'^B = ([idv]_B^B')^(-1)
+ $
+ So
+ $
+   [T]_B'^B' = P^(-1) [T]_B^B P => det([T]_B^B) = det([T]_B'^B')
+ $
+ == Recall
+
+For linear maps $S,T:V -> V$ and a basis $B$:
+
+$
+[S compose T]^B_B = [S]^B_B [T]^B_B
+$
+
+If $T$ is an isomorphism,
+
+$
+[T^(-1)]^B_B = ([T]^B_B)^(-1).
+$
+
+The identity map is represented by the identity matrix:
+
+$
+[id_V]^B_B = I.
+$
+= Eigenvalues and Eigenvectors
+
+== 20.a.4
+
+Let $lambda_1, dots, lambda_n$ be pairwise distinct eigenvalues of $T$ with eigenvectors $v_1, dots, v_n$.
+
+We prove by induction on $n$.
+
+Base case $n=1$: since $v_1 != 0$, the set ${v_1}$ is linearly independent.
+
+Induction step: Assume $v_1, dots, v_n$ are linearly independent.  
+Let
+
+$
+a_1 v_1 + dots + a_n v_n + a_(n+1) v_(n+1) = 0. quad (star)
+$
+
+Apply $T$:
+
+$
+a_1 lambda_1 v_1 + dots + a_n lambda_n v_n
++ a_(n+1) lambda_(n+1) v_(n+1) = 0. quad (**)
+$
+
+Now compute $(**) - lambda_(n+1) (*)$:
+
+$
+a_1 (lambda_1 - lambda_(n+1)) v_1
++ dots +
+a_n (lambda_n - lambda_(n+1)) v_n
+= 0.
+$
+
+By the induction hypothesis,
+
+$
+a_i (lambda_i - lambda_(n+1)) = 0
+quad forall i = 1, dots, n.
+$
+
+Since $lambda_i != lambda_(n+1)$,
+
+$
+a_1 = dots = a_n = 0.
+$
+
+Substitute into $(*)$:
+
+$
+a_(n+1) v_(n+1) = 0.
+$
+
+Since $v_(n+1) != 0$,
+
+$
+a_(n+1)=0.
+$
+
+Thus
+
+$
+a_1 = dots = a_n = a_(n+1)=0,
+$
+
+so $v_1, dots, v_n, v_(n+1)$ are linearly independent.
+
+= Trace
+== Lemma 21.a.10
+
+$
+  fa A,B in M_(n times n) (K) \
+  Tr(A dot B) = Tr(B dot A)
+$
+If $A$ and $B$ are similar matrices then 
+$
+  Tr(A) = Tr(B)
+$
+In particular, if $B$ ab $B'$ are two bases for $V$ then 
+$
+  Tr([T]_B^B) = Tr([T]_B'^B')
+$ 
+Thus, $Tr(T)$ is well-defined.\
+Proof
+\
+1)
+$
+  Tr(A dot B) &= um (A dot B)_(i,i)\
+  &= um sum_(j=1)^n A_(i j)B_(j i)\
+  &= sum_(i,j) A_(i j) B_(j i)\
+  &=sum_(i,j) A_(j i) B_(i j)\
+  &= um sum_(j=1)^n A_(j i)B_(i j)\
+  &= um (B dot A)_(i i) = Tr(B dot A)
+$
+2)
+If $B = P^(-1) A P$ then
+$
+  Tr(B) &= Tr(P^-1 A P)\
+  &= Tr(P^-1 dot ( A P))\
+  &underbrace(=, "by "1) Tr(A P P^(-1)) = Tr(A)
+$
+3)
+$
+  Tr([T]_B'^B') &= Tr([idv]_B'^B dot  [T]_B^B dot [idv]_B'^B)\
+  & underbrace(=, "by "1) Tr([T]_B^B)
+$
+
+== Geometric and algebraic multiplicities of eigenvalues (21.b3/22.b4)
+
+
+Let $lambda$ be an eigenvalue of $T in End(V)$.
+
+$
+m_g (T;lambda)
+=
+dim(E_T (lambda)).
+$
+
+If $V$ is finite-dimensional,
+
+$
+m_a (T;lambda)
+=
+"multiplicity of " lambda " in " P_T (x).
+$
+Prob (21.b.4)
+$
+  m_g (T; lambda) <= m_a (T; lambda)
+$
+Proof\
+
+Let
+
+$
+k = m_g(T;lambda)=dim(E_T(lambda)).
+$
+
+Choose a basis
+
+$
+(v_1,dots,v_k)
+$
+
+of $E_T(lambda)$ and extend it to a basis
+
+$
+B=(v_1,dots,v_k,w_(k+1),dots,w_n)
+$
+
+of $V$.
+
+Then
+
+$
+[T]^B_B= mat(bar, , bar; [T v_1]_B,dots,[T v_n]_B;bar,,bar) =
+
+mat(lambda I_k, star;0,C)
+
+$
+where $C in M_((n-k) times (n-k)) (K)$
+
+Hence
+
+$
+P_T(x)
+=
+det([T]^B_B-x I_n)
+=(lambda-x)^k det(C-x I_(n-k)).
+$
+
+Therefore,
+
+$
+(lambda-x)^k bar P_T (x),
+$
+
+so $lambda$ is a root of $P_T (x)$ of multiplicity at least $k$:
+
+$
+m_a (T;lambda) >= k.
+$
+
+Since
+
+$
+k=m_g (T;lambda),
+$
+
+we conclude
+
+$
+m_g (T;lambda) =k <= m_a (T;lambda).
+$
+
+#align(right)[$square$] 
+
+= The orthogonal Complement
+
+Let $(V, ip(.,.))$ be an inner product space over $(#R "or" #C)$
+
+== def 22.b.1
+Let $nothing != S subset.eq V$ be a subset. The orthogonal complement os $S$ is defined as followed.
+$
+  S^perp := {v in V bar v perp s quad fa s in S} = {v in V bar ip(v,s)=0}
+$
+When 
+$
+  S ={v} quad " we write" v^perp := {v}^perp
+$
+
+proof\
+1) $S^perp subset.eq V$ is a linear subspace
+
+$
+  0 in S^perp "b.c." ip(0,s) =0 quad fa s in S\
+
+$
+If $alpha,beta in K, v,w in S^perp$ then $fa s in S$ we have 
+$
+  ip(alpha v + beta w,s) = alpha ip(v,s) 1 beta ip(w,s) = 0 => alpha v + beta w in S^perp
+$
+2) $0^perp = V, V^perp ={0}$\
+$0^perp = V$ 
+$
+  0^perp = {v in V bar ip(0,v) = 0} = V
+$
+Let $v in V^perp. => ip(v,w) = 0 quad w in V$. In particular 
+$
+  ip(v,v) = 0 => v = 0
+$ 
+This shows $V^perp subset.eq {0}$. But clearly ${0} in V^perp$. So $V^perp = {0}$.\
+3) $S inter S^perp$ is either $nothing$ or equal to ${0}$\
+If $S inter S^perp- = nothing$ we are done. otherwise, assume that $s in S inter S^perp => ip(s,s)= 0 => s =0$\
+4) If $S subset.eq T$ then $S^perp supset.eq T^perp$\
+Let $s in T^perp$
+$
+  ip(s,t) = 0 quad fa t in T
+$
+Since 
+$
+  S subset.eq T
+$
+this holds $fa s in S$.\
+
+
+so
+$
+  T^perp subset.eq S^perp
+$
+5) $("Sp"(S))^perp = S^perp$\
+We have $S subset.eq span(S)$.\
+By 4),
+$
+(span(S))^perp subset.eq S^perp.
+$
+
+We'll show that
+$
+S^perp subset.eq (span(S))^perp.
+$
+
+Indeed, let $v in S^perp$.
+
+Let $u in span(S)$. Write
+$
+u = sum_(i=1)^k alpha_i u_i
+$
+with $alpha_i in K$ and $u_i in S$.
+
+Then
+$
+ip(v, u)
+= sum_(i=1)^k alpha_i ip(v, u_i)
+= 0.
+$
+
+Hence
+$
+v in (span(S))^perp.
+$
+
+Therefore
+$
+(span(S))^perp = S^perp.
+$
+
+
+6) Let $s in S$.
+
+Then for all $v in S^perp$ we have
+$
+ip(v, s) = 0.
+$
+
+Hence
+$
+ip(s, v) = 0.
+$
+
+So
+$
+s in (S^perp)^perp.
+$
+
+Thus
+$
+S subset.eq (S^perp)^perp.
+$
