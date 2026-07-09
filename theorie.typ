@@ -1278,3 +1278,77 @@ $
 $
 
 Thus $T'$ is $K$-linear.
+== 23.a.2
+
+
+Let $V, W, U$ be finite-dimensional inner product spaces over
+$K in {bb(R), bb(C)}$.
+
+Let $S, T: V -> W$ and $R: W -> U$ be linear maps. Then:
+
+$
+  &1) quad T^* " is linear," \
+  &2) quad (S + T)^* = S^* + T^*, \
+  &3) quad (lambda T)^* = overline(lambda) T^*, quad forall lambda in K, \
+  &4) quad (T^*)^* = T, \
+  &5) quad (id_V)^* = id_V, \
+  &6) quad (R compose T)^* = T^* compose R^*.
+$
+
+
+
+1) Was proved already.
+
+2) Let $w in W, v in V$.
+$
+  ip(v, (S + T)^* w)
+  &= ip((S + T)v, w) \
+  &= ip(S v, w) + ip(T v, w) \
+  &= ip(v, S^* w) + ip(v, T^* w) \
+  &= ip(v, (S^* + T^*)w).
+$
+Thus $(S + T)^* w = (S^* + T^*)w$, hence
+$(S + T)^* = S^* + T^*$.
+
+3) Let $lambda in K$, $v in V$, $w in W$.
+$
+  ip(v, (lambda T)^* w)
+  &= ip((lambda T)v, w) \
+  &= ip(lambda T v, w) \
+  &= lambda ip(T v, w) \
+  &= lambda ip(v, T^* w) \
+  &= ip(v, overline(lambda) T^* w).
+$
+Thus $(lambda T)^* w = overline(lambda) T^* w$, hence
+$(lambda T)^* = overline(lambda) T^*$.
+
+4) Let $v in V, w in W$.
+$
+  ip(w, (T^*)^* v)
+  &= ip(T^* w, v) \
+  &= overline(ip(v, T^* w)) \
+  &= overline(ip(T v, w)) \
+  &= ip(w, T v).
+$
+Thus $(T^*)^* v = T v$, hence $(T^*)^* = T$.
+
+5) Let $v, w in V$.
+$
+  ip(v, (id_V)^* w)
+  &= ip(id_V(v), w) \
+  &= ip(v, w) \
+  &= ip(v, id_V(w)).
+$
+Thus $(id_V)^* w = id_V(w)$, hence $(id_V)^* = id_V$.
+
+6) Let $v in V, u in U$.
+$
+  ip(v, (R compose T)^* u)
+  &= ip((R compose T)v, u) \
+  &= ip(R(T v), u) \
+  &= ip(T v, R^* u) \
+  &= ip(v, T^*(R^* u)) \
+  &= ip(v, (T^* compose R^*)u).
+$
+Thus $(R compose T)^* u = (T^* compose R^*)u$, hence
+$(R compose T)^* = T^* compose R^*$.
