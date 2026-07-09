@@ -10,6 +10,8 @@
   [Lukas Mengis],
 )
 #pagebreak()
+#outline()
+#pagebreak()
 = The rank theorem
 
 Let
@@ -716,8 +718,8 @@ $
 
 Let $(V, ip(.,.))$ be an inner product space over $(#R "or" #C)$
 
-== def 22.b.1
-Let $nothing != S subset.eq V$ be a subset. The orthogonal complement os $S$ is defined as followed.
+== def 22.b.1/2
+Let $nothing != S subset.eq V$ be a subset. The orthogonal complement on $S$ is defined as followed.
 $
   S^perp := {v in V bar v perp s quad fa s in S} = {v in V bar ip(v,s)=0}
 $
@@ -824,3 +826,455 @@ Thus
 $
 S subset.eq (S^perp)^perp.
 $
+== 22.b.3
+Let $V$ be an inner product space and $U subset.eq V$ a f.dim. subspace. Then $U^perp$ is a complement of $U$ in $V$ ($U + U^perp = V "&" U inter U^perp = {0}$).\
+Proof\
+By the Lemma we have 
+$
+  U inter U^perp ={0}. 
+$
+So it's enough to show that 
+$
+  U + U^perp = V
+$
+Put 
+$
+  r := dim(V)
+$
+and pick an orthonormal basis for $U$
+$
+  B = (e_1,dots, e_r)
+$
+Let $v in V$.\
+Define 
+$
+  tilde(P)_U (v) := underbrace(ip(v,e_1) e_1 + dots + ip(v,e_r) e_r , "The orthogonal projection of" v "to/on" U) in U
+$
+We have
+$
+  v in underbrace(tilde(P)_U (v), in U) + ( v - tilde(P)_U (v)). quad (star)
+$
+We claim that 
+$
+  v - tilde(P)_U (v) in U^perp
+$
+Indeed
+$
+  ip(v-tilde(P)_U (v), e_i) &= ip(v,e_i)- sum_(k=1)^r ip(v,e_k) dot ip(e_k,e_i)quadd #text(size: 8pt)[recall $quad tilde(P)_U (v) = sum_(k=1)^r ip(v,e_k) e_k$] \
+  &= ip(v,e_i) -underbrace(ip(v,e_i),"due to the orthonormal basis") =0
+$
+This holds $fa i$, hence 
+$
+  v- tilde(P)_U (v) perp Sp(e_1,dots,e_r) =U  => v- tilde(P)_U (v) in U^perp
+$
+Going back to $(star)$ we see that
+$
+  v = underbrace(tilde(P)_U (v),in U) + underbrace((v - tilde(P)_U (v)),in U^perp).
+$
+This holds $fa v in V. => V = U + U^perp$
+#align(right)[$square$]
+#underline([Remark.]) If $U subset.eq V$ is a f.dim. subsapce, then since $U^perp$ is a complement of $U$ in $V$, we have a ca.is. 
+$
+  V tilde.equiv U plus.o U ^perp .
+$
+= QR decomposition
+
+1) Let  $A in GL_n (#R)$. Then $ex Q in O(n)$ and an upper triangular matrix $R in M_(n times n) (#R) st A = Q dot R$.\
+2) Let $A in GL_n (#C)$. Then $ex Q in U(n)$ and an upper triangular matrix $R in M_(n times n) (#C) st A = Q dot R$.\
+Proof (1/2 together).\F
+Write
+$
+  A = mat(bar,,bar;v_1,dots,v_n;bar,,bar) quad "with" quad v_k in K^n_("col") quad (K = #R "or" #C)
+$
+Since $A in underbrace(GL_n (K), =>"full rank"), quad v_1,dots, v_n$ form a basis for K^n. Apply G-M orthogonalization to 
+$
+  v_1,dots,v_n
+$
+and obtain an orthonormal basis 
+$
+  e_1,dots,e_n quad "for" K^n
+$
+Note that $fa 1<= j <=n$,
+$
+  Sp(v_1,dots,v_j) = Sp(e_1,dots,e_j)
+$
+And we also have:
+$
+v_1 & = ip(v_1, e_1) e_1 \
+
+v_2 & = ip(v_2, e_1) e_1
+      + ip(v_2, e_2) e_2 \
+
+dots.v & \
+
+v_j & = ip(v_j, e_1) e_1
+      + dots.h.c
+      + ip(v_j, e_j) e_j \
+
+dots.v & \
+
+v_n & = ip(v_n, e_1) e_1
+      + dots.h.c
+      + dots.h.c
+      + ip(v_n, e_n) e_n.
+$
+$
+  => underbrace(mat(bar,,bar,,bar;
+  v_1,dots.c,v_j,dots.c,v_n;bar,,bar,,bar),A) = underbrace(mat(bar,,bar,,bar;e_1,dots.c,e_i,dots.c,e_n;bar,,bar,,bar),Q) underbrace(mat(
+  ip(v_1, e_1), ip(v_2, e_1), dots.h.c, ip(v_j, e_1), dots.h.c, ip(v_n, e_1);
+  0, ip(v_2, e_2), dots.h.c, ip(v_j, e_2), dots.h.c, ip(v_n, e_2);
+  dots.v, 0, dots.down, dots.v, , dots.v;
+  dots.v, dots.v, , ip(v_j, e_j), , dots.v;
+  dots.v, dots.v, , 0, dots.down, dots.v;
+  0, 0, dots.h.c, 0, dots.h.c, ip(v_n, e_n)
+),R) 
+$
+#align(right)[$square$]
+== Extension of QR decomposition
+
+Let $A in M_(n times n)(K)$ and let $r := rank(A)$.
+Write
+
+$
+A =
+mat(
+  |, |, , |;
+  v_1, v_2, dots.h.c, v_n;
+  |, |, , |
+),
+quad
+v_j in K^n.
+$
+
+If $r = 0$, then $A = 0$. Hence we may take $R = 0$ and $Q$ arbitrary orthogonal/unitary.
+
+Assume now that $r >= 1$.
+Choose indices
+
+$
+1 <= i_1 < dots.h.c < i_r <= n
+$
+
+inductively as follows: $i_1$ is the minimal index such that $v_(i_1) != 0$.
+If $i_1,dots.h.c,i_k$ are already chosen, then $i_(k+1)$ is the minimal index $l > i_k$ such that
+
+$
+v_l in.not span(v_(i_1),dots.h.c,v_(i_k)).
+$
+
+The construction stops after $r$ steps. Thus, for every $k=1,dots.h.c,r$,
+
+$
+v_(i_1),dots.h.c,v_(i_k)
+$
+
+is a basis of
+
+$
+span(v_1,dots.h.c,v_(i_k)).
+$
+
+Apply Gram--Schmidt to
+
+$
+v_(i_1),dots.h.c,v_(i_r)
+$
+
+and obtain an orthonormal system
+
+$
+e_1,dots.h.c,e_r
+$
+
+such that for every $k=1,dots.h.c,r$,
+
+$
+span(e_1,dots.h.c,e_k)
+=
+span(v_(i_1),dots.h.c,v_(i_k))
+=
+span(v_1,dots.h.c,v_(i_k)).
+$
+
+Extend $e_1,dots.h.c,e_r$ to an orthonormal basis
+
+$
+e_1,dots.h.c,e_r,e_(r+1),dots.h.c,e_n
+$
+
+of $K^n$.
+
+Define
+
+$
+Q =
+mat(
+  |, |, , |;
+  e_1, e_2, dots.h.c, e_n;
+  |, |, , |
+).
+$
+
+Then
+
+$
+Q in O(n) " if " K = RR,
+quad
+Q in U(n) " if " K = CC.
+$
+
+Since every column $v_j$ belongs to $im(A)$, we have
+
+$
+v_j =
+sum_(k=1)^r ip(v_j,e_k)e_k.
+$
+
+Also,
+
+$
+ip(v_j,e_k)=0
+quad "for all" k>r.
+$
+
+Moreover, by the minimal choice of the indices, if
+
+$
+i_k <= j < i_(k+1),
+$
+
+then
+
+$
+v_j in span(v_1,dots.h.c,v_(i_k))
+=
+span(e_1,dots.h.c,e_k).
+$
+
+Hence
+
+$
+ip(v_j,e_l)=0
+quad "for all" l>k.
+$
+
+Thus
+
+$
+A = Q R,
+$
+
+where
+
+$
+R =
+mat(
+  ip(v_1,e_1), ip(v_2,e_1), dots.h.c, ip(v_n,e_1);
+  ip(v_1,e_2), ip(v_2,e_2), dots.h.c, ip(v_n,e_2);
+  dots.v, dots.v, dots.down, dots.v;
+  ip(v_1,e_r), ip(v_2,e_r), dots.h.c, ip(v_n,e_r);
+  0, 0, dots.h.c, 0;
+  dots.v, dots.v, , dots.v;
+  0, 0, dots.h.c, 0
+)
+in M_(n times n)(K).
+$
+
+The last $n-r$ rows of $R$ are zero. Moreover, the nonzero rows have the same triangular structure as in the full-rank case, with pivots in the columns
+
+$
+i_1,dots.h.c,i_r.
+$
+
+Therefore $R$ has the block form
+
+$
+R =
+mat(
+  C,*;
+  0,0
+),
+$
+
+where $C in M_(r times r)(K)$ is upper triangular after restricting to the pivot columns $i_1,dots.h.c,i_r$.
+
+Hence
+
+$
+A =  Q R
+$
+
+Zum Verstänis. Die Diagonale der $C$ Matrix muss nicht immer ungleich null sein nur solange die Spaltenvektoren von in Serie pairwise distinct sind, wenn auf einmal ein Spaltenvektor kommt der abhängig von den vorderen Spalten ist dann, macht es wie einen Horizontalen Stritt nach rechts (pivot columms $i_1,dots,i_r$).
+
+= Dual spaces & inner products
+
+Assume 
+$v in K^n$ and let 
+$
+  phi: K^n -> K
+$
+be a functionial. Then $ex!$ 
+$
+  A = (a_1,dots,a_n) in M_( 1 times n) (K) st phi(v) = A dot v quad fa v in K^n.
+$
+Indeed, let $e_1,dots,e_n$ be the std. basis for $K^n$ and define 
+$
+  a_1 = phi(e_1), dots ,a_n = phi(e_n)
+$
+Let
+$
+  v = vec(v_1,dots.v,v_n) in K^n
+$
+Then 
+$
+  phi(v) = phi vec(v_1,dots.v,v_n) = phi(v_1 e_1 + dots, + v_n e_n) = v_1 phi(e_1) + dots + v_n phi(e_n)\
+  v_1 a_1 + dots + v_n a_n = A dot v.
+$
+
+== 23.a.1
+Let $(V, ip(.,.))$ be f.dim. inner prod.sp.over K ($RR "or" CC$). Let $phi in V^star$.\
+Then 
+$
+  ex!  u in V st phi = phi_u ie phi(v) = ip(v,u)quad fa v in V
+$
+In fact for $K = RR$ the map
+$
+  Phi: V &-> V^star\
+  v &|-> phi_u
+$
+is an isomorphism. For $K = CC$, this map is injective & surjective but only $CC$-anitlinear 
+$
+  ie &Phi(u_1 + u_2) = Phi(u_1) + Phi(u_2), quad fa u_1,u_2 in V\
+  &Phi(c dot u) = overline(c) dot Phi(u), quad fa c in CC, quad u in V
+$
+Proof (that $fa phi in V^star quad ex! u st phi = phi_u$)
+Fix an orthonormal basis
+$
+  e_1, dots, e_n
+$
+for $V quad (n := dim(V))$\
+Let $phi in V^star$. Let $v in V$.  We have
+$
+  v = um ip(v,e_i)e_abs(abs(i)).
+$
+$
+  => phi(v) &= phi(um ip(v,e_i)e_i) \
+  &= um ip(v,e_i) phi (e_i)\
+  &= ip(v, um overline(phi(e_i))dot e_i)
+$
+Define
+$
+  u = um overline(phi(e_i)) dot e_i => phi = phi_u
+$
+#underline[Uniqueness of u.] Suppose that $phi_u_1 = phi_u_2$ for $u_1,u_2 in V$ 
+$
+  => ip(v,u_1) = ip(v,u_2) quad fa v in V.
+$
+(go through the standard basis to check)\
+linearity obvious 
+= The adjoint map
+Let $V,W$  be vect. spaces over $K$. \
+Let
+$
+  T : V -> W
+$
+be a linear map. This induces a linear map
+$
+  T^star: W^star -> V^star
+$
+by
+$
+  T^star (phi) := phi compose T 
+$
+
+#align(center)[
+  #diagram(
+    cell-size: 25mm,
+    edge((0,0), "r", "->", $T$),
+    edge((0,0), "dr", "->", $phi compose T$, label-side: right),
+    edge((1,0),"d","->", $phi$, label-side:left),
+    node((0,0),$V$),
+    node((1,0), $W$),
+    node((1,1),$K$)
+
+
+  )
+]
+Assume that
+$
+  (V, ip(.,.)_V) quad (W ip(.,.)_W)
+$
+are inner product spaces over $K$. \
+Assume $dim(V) < oo$.\
+Given $T$, we can define 
+$
+  T' : W-> V 
+$
+using "canonical" identifications 
+$
+  W tilde.eq W^star quadd V tilde.eq V^star.
+$
+#align(center)[
+  #diagram(
+    cell-size: 25mm,
+    edge((0,0), "->", "r",$T^star$),
+    edge((0,1),"u", "->", $Phi_W$),
+    edge((1,0),"d","->",$Phi^(-1)_V$),
+    edge((0,1), "r","--|>", $T'$),
+    node((0,0),$W^star$),
+    node((1,0),$V^star$),
+    node((0,1), $W$),
+    node((1,1),$V$),
+    node((2,0.5), $ie quad T' := Phi^(-1)_V compose T^star compose Phi_W$),
+    edge((1.95,0.6),"->",(1.05,0.5), stroke: green),
+    node((2.07,0.65),  [here we're using that $dim V < oo$])
+)
+  )
+  
+]
+Note that $T'$ is uniquely defined by
+$
+  &Phi_V compose T' = T^star compose Phi_W\
+<=>& fa w in W, quad Phi_V compose T'(w) = T^star Phi_W (w)\
+<=>& phi_(T'(w)) = T^star phi_w (in V^star)\
+<=> & fa v in V, quad phi_(T'(w)) (v) = (T^star phi_w) (v)\
+<=> & ip(v,T'(w))_V = phi_w (T(v)) = ip(T(v),w)_W
+$
+In other words,
+$
+  ip(T v,w)_W = ip(v,T'w)_V quad fa v in V, w in W
+$
+Claim $T'$ is a linear map.\
+#underline[Proof.] For  $K = RR, Phi_W,Phi_V$ and $T^star$ are linear $=> T'$ too.
+
+
+
+Define
+$
+  T' := Phi_(V)^(-1) compose T^* compose Phi_(W) : W -> V.
+$
+
+For $K = bb(R)$ all maps are linear, hence $T'$ is linear.
+
+Now let $K = bb(C)$. The maps $Phi_(W), Phi_(V)^(-1)$ are additive and conjugate-linear, while $T^*$ is linear.
+
+Additivity:
+$
+  T'(w_1 + w_2)
+  &= Phi_(V)^(-1)(T^*(Phi_(W)(w_1 + w_2))) \
+  &= Phi_(V)^(-1)(T^*(Phi_(W)(w_1) + Phi_(W)(w_2))) \
+  &= Phi_(V)^(-1)(T^* Phi_(W)(w_1) + T^* Phi_(W)(w_2)) \
+  &= T'(w_1) + T'(w_2).
+$
+
+Homogeneity: for $c in bb(C)$,
+$
+  T'(c w)
+  &= Phi_(V)^(-1)(T^*(Phi_(W)(c w))) \
+  &= Phi_(V)^(-1)(T^*(overline(c) Phi_(W)(w))) \
+  &= Phi_(V)^(-1)(overline(c) T^*(Phi_(W)(w))) \
+  &= c Phi_(V)^(-1)(T^*(Phi_(W)(w))) \
+  &= c T'(w).
+$
+
+Thus $T'$ is $K$-linear.
