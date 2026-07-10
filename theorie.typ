@@ -1352,3 +1352,233 @@ $
 $
 Thus $(R compose T)^* u = (T^* compose R^*)u$, hence
 $(R compose T)^* = T^* compose R^*$.
+
+= Spectral Theorems
+
+Let $V$ be an inner prdo.sp and 
+$
+  T : V -> V
+$
+an endomorphism. We say that $T$ is #text(fill: red)[orthogonally diagonylizable] if $ex$ an prthonormal basis for $V$ consisting of eigenvectors of $T$.
+== 24.a.3
+Let $V$ be an inner prod. sp. An endomorphism 
+$
+  T:V-> V
+$
+is called normal if
+$
+  T compose T^star = T^star compose T.
+$
+A matrix $A in M_(n times n) (K) quad (K = RR,CC)$ is called noraml if 
+$
+  &A dot overline(A)^T = overline(A)^T dot A\
+  <=> &T_A : K^n -> K^n quad #text(size: 8pt)[(is called normal, \if we endow $K^n$ with its std. inner produrct)]
+$
+== Note
+We've seen that if
+$
+  T: V-> V
+$
+is orthogonal dia.ble then $T$ is noraml. \
+Is the converse statement true?\
+No not in every $K$.\ 
+Ex. $RR$ set
+$
+  A = mat(0,1;-1,0). quadd T_a: RR^2 -> RR^2
+$ 
+There $ex.not$ eigenvalue in $RR$ and $ex.not$ eigenvectors in $RR^2$.\
+But in $CC$. If you expand  $K$ it is always true.
+== 24.a.5
+Let $V$ be a f.fim. inner prod .sp.over $K$. Let $T:V->V$ be a normal endo. Then:
+#set enum(numbering: "1)")
++ $fa v in V, quad baar(T v) = baar(T^star v)$.
++ $fa lambda in K$ the endo. $T-lambda dot idv$ is also normal.
++ If $v$ is an eigenvect. of $T$ with eigenvalue $lambda$, then \
+  v is also an $-''-- quad T^star quad ---''--- quad overline(lambda)$ 
++ Let $v_1,v_2$ be eigenvectors of $T$ with eigenvalues $lambda_1, lambda_2$ respectively. If $lambda_1!= lambda_2$ then $v_1 perp v_2 = 0$
+#underline[Proof.]
+#set enum(numbering: "1)")
++ $
+    baar(T v)^2 &= ip(T v, T v)\
+    &=ip(v,T^star compose T v)\
+    &underbrace(=, "T is normal") ip(v,T compose T^star v)\
+    &= overline(ip(T compose T^star v,v))\ 
+    &= overline(ip(T^star v, T^star v))\ 
+    &= ip(T^star v, T^star v) = baar(T^star v)^2
+  $
+
++ $
+    (T - lambda op("id")_V) compose (T - lambda op("id")_V)^*
+    &= (T - lambda op("id")_V) compose
+      (T^* - overline(lambda) op("id")_V) \
+    &= T compose T^*
+      - overline(lambda) T 
+      - lambda T^*
+      + lambda overline(lambda) op("id")_V
+      quad (*) \
+
+    (T - lambda op("id")_V)^* compose (T - lambda op("id")_V)
+    &= (T^* - overline(lambda) op("id")_V) compose
+      (T - lambda op("id")_V) \
+    &= T^* compose T
+      - lambda T^*
+      - overline(lambda) T
+      + overline(lambda) lambda op("id")_V \
+    &= (*) quad
+      "since " T compose T^* = T^* compose T.
+  $
+
++ $
+  "Let " v " be an eigenvector of " T " with eigenvalue " lambda "." \
+  (T - lambda op("id")_V)v = 0. \
+  "By part (2), the operator "
+  T - lambda op("id")_V
+  " is normal. Hence, by part (1), " \
+  norm((T^* - overline(lambda) op("id")_V)v)
+  = norm((T - lambda op("id")_V)^*v)
+  = norm((T - lambda op("id")_V)v)
+  = 0. \
+  => (T^* - overline(lambda) op("id")_V)v = 0.
+  $
+
++ $
+  "Let " v_1 " and " v_2 " be eigenvectors of " T
+  " corresponding to the distinct eigenvalues "
+  lambda_1 " and " lambda_2 "." \
+  $
+  $
+
+  lambda_1 ip(v_1, v_2)
+  &= ip(lambda_1 v_1, v_2) \
+  &= ip(T v_1, v_2) \
+  &= ip(v_1, T^*v_2) \
+  &= ip(v_1, overline(lambda_2) v_2)
+  quad "by part (3)" \
+  &= lambda_2 ip(v_1, v_2). \
+  $
+  $
+
+  "Thus,"
+  (lambda_1 - lambda_2) ip(v_1, v_2) = 0. \
+
+  "Since " lambda_1 != lambda_2 ", it follows that"
+  ip(v_1, v_2) = 0.
+  $ 
+== Proof of spectral THM. over $CC$
+$
+
+"Only prove:"
+quad
+T " normal " arrow.r " orthogonally diagonalizable." \
+
+"By triangularization,"
+exists cal(E)
+" basis of "
+V
+" such that "
+[T]_(cal(E))
+" is upper triangular." \
+
+"Apply Gram--Schmidt to "
+cal(E)
+":"
+quad
+cal(B) = (v_1, dots, v_n)
+" orthonormal,"
+quad
+[T]_(cal(B))
+" still upper triangular." \
+
+"Write"
+quad
+A := [T]_(cal(B))
+= (a_(i j))_(1 <= i,j <= n)
+=
+mat(
+a_(11), a_(12), dots, a_(1n);
+0, a_(22), dots, a_(2n);
+dots.v, dots, dots, dots.;
+0, 0, dots, a_(n n)
+). \
+
+"Since "
+cal(B)
+" is orthonormal,"
+quad
+[T^*]_(cal(B)) = overline(A)^T. \
+
+||T v_1||^2
+= |a_(11)|^2, \
+
+||T^*v_1||^2
+= sum_(k=1)^n |a_(1k)|^2
+= |a_(11)|^2 + |a_(12)|^2 + dots + |a_(1n)|^2. \
+
+T " normal "
+arrow.r
+||T v_1|| = ||T^*v_1||, \
+
+|a_(11)|^2
+=
+|a_(11)|^2
++
+|a_(12)|^2
++
+dots
++
+|a_(1n)|^2, \
+
+a_(12)=dots=a_(1n)=0. \
+
+"Thus"
+quad
+A
+=
+mat(
+a_(11),0,dots,0;
+0,a_(22),dots,a_(2n);
+dots.v,dots,dots,dots.v;
+0,0,dots,a_(n n)
+). \
+
+"Next,"
+quad
+||T v_2||^2 = |a_(22)|^2, \
+
+||T^*v_2||^2
+=
+|a_(22)|^2
++
+|a_(23)|^2
++
+dots
++
+|a_(2n)|^2, \
+
+T " normal "
+arrow.r
+a_(23)=dots=a_(2n)=0. \
+
+dots.v \
+
+"Inductively,"
+forall 1 <= k < n,
+quad
+a_(k,k+1)=dots=a_(k n)=0. \
+
+"Therefore"
+quad
+[T]_(cal(B))
+=
+mat(
+a_(11),0,dots,0;
+0,a_(22),dots,0;
+dots.v,dots,dots,dots.v;
+0,0,dots,a_(n n)
+)
+" is diagonal." \
+
+therefore
+T
+" is orthogonally diagonalizable."
+$
